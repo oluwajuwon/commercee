@@ -32,9 +32,14 @@ export const Button = ({
       style={[styles.container, buttonContainerStyles]}
       activeOpacity={0.7}
       onPress={onPress}
-      hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}>
-      <Text style={[styles.buttonText, buttonTextStyles]}>{text}</Text>
-      {isLoading === true && <ActivityIndicator size="small" color="#fff" />}
+      hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}
+      testID="button-container">
+      <Text style={[styles.buttonText, buttonTextStyles]} testID="button-text">
+        {text}
+      </Text>
+      {isLoading === true && (
+        <ActivityIndicator size="small" color="#fff" testID="button-loader" />
+      )}
     </TouchableOpacity>
   );
 };

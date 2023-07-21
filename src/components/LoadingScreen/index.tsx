@@ -9,7 +9,7 @@ const LoadingScreen = ({...props}: LoadingScreenProps) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <View style={styles.container} testID='loading-screen'>
         <ActivityIndicator color={'#333333'} />
       </View>
     </SafeAreaView>

@@ -43,11 +43,12 @@ export const BasketItem = ({
         source={{uri: imgUrl}}
         style={styles.img}
         resizeMode={FastImage.resizeMode.cover}
+        testID='item-image'
       />
       <View style={styles.details}>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name} testID='item-name'>{name}</Text>
         <View style={styles.productDetailTop}>
-          <Text style={styles.price}>£{price}</Text>
+          <Text style={styles.price} testID='item-price'>£{price}</Text>
           <Image source={Like} style={styles.like} />
         </View>
         <View style={styles.bottom}>
@@ -55,6 +56,7 @@ export const BasketItem = ({
             handleAdd={handleAdd}
             quantity={quantity}
             handleSubtract={handleSubtract}
+            
           />
           <Button
             text="Remove"

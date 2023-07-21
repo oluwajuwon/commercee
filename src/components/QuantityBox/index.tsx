@@ -16,13 +16,13 @@ export const QuantityBox = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleSubtract} style={styles.modifierBox}>
+      <TouchableOpacity onPress={handleSubtract} style={styles.modifierBox} testID='quantity-subtract'>
         <Text style={styles.txt}>{'-'}</Text>
       </TouchableOpacity>
       <View style={styles.textBox}>
         <Text style={styles.quantityTxt}>{quantity}</Text>
       </View>
-      <TouchableOpacity onPress={handleAdd} style={styles.modifierBox}>
+      <TouchableOpacity onPress={handleAdd} style={styles.modifierBox} testID='quantity-add'>
         <Text style={styles.txt}>{'+'}</Text>
       </TouchableOpacity>
     </View>

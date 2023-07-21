@@ -1,10 +1,7 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  ActivityIndicator,
   Text,
-  ViewStyle,
-  TextStyle,
   Image,
   View,
 } from 'react-native';
@@ -23,16 +20,18 @@ export const CartBtn = ({}: CartBtnProps) => {
     navigation.navigate('Basket' as never);
   };
 
+  if (cart.length === 0) return;
   return (
     <TouchableOpacity
       style={styles.container}
       hitSlop={{top: 8, bottom: 8, left: 8, right: 8}}
-      onPress={handleNavigate}>
+      onPress={handleNavigate}
+      testID="btn-container">
       <View style={styles.detailsContainer}>
         <View style={styles.txtContainer}>
-          <Text style={styles.buttonText}>{cart.length}</Text>
+          <Text style={styles.buttonText} testID="btn-cart-length">{cart.length}</Text>
         </View>
-        <Image source={Bag} style={styles.bag} />
+        <Image source={Bag} style={styles.bag} testID="btn-cart-icon"/>
       </View>
     </TouchableOpacity>
   );

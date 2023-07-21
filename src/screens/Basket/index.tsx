@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {FlatList, Image, SafeAreaView, View} from 'react-native';
+import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import getStyles from './styles';
@@ -21,11 +21,15 @@ export const Basket = ({}: BasketProps) => {
   const products = useAppSelector(state => state.basket.products);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const handleCheckout = () => {};
+
+  const handleCheckout = () => {
+    /** This method is suposed to handle the flow after the user has decided on the products and their quantity */
+  };
 
   const handleAddQuantity = (productId: number) => {
     dispatch(addQuantity({id: productId}));
   };
+
   const handleSubtractQuantity = (productId: number) => {
     dispatch(removeQuantity({id: productId}));
   };
@@ -51,8 +55,16 @@ export const Basket = ({}: BasketProps) => {
           keyExtractor={(item: BasketItemType, index) =>
             item.product.id?.toString()
           }
+          testID="basket-list"
+          ListEmptyComponent={
+            <View testID="empty-basket-list" style={styles.emptyBasket}>
+              <Text>No items in your basket</Text>
+            </View>
+          }
         />
-        <Button text="Checkout" onPress={handleCheckout} />
+        {products.length > 0 && (
+          <Button text="Checkout" onPress={handleCheckout} />
+        )}
       </View>
     </SafeAreaView>
   );

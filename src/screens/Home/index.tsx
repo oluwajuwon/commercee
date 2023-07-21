@@ -1,5 +1,5 @@
-import React, {Fragment, useState} from 'react';
-import {SafeAreaView, FlatList} from 'react-native';
+import React from 'react';
+import {SafeAreaView, FlatList, View, Text} from 'react-native';
 import getStyles from './styles';
 import {useProducts} from '../../hooks/useProducts';
 import LoadingScreen from '../../components/LoadingScreen';
@@ -8,18 +8,30 @@ import {ProductType} from '../../types/products';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/routes';
+import ErrorScreen from '../../components/ErrorScreen';
 
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Product'>;
 
-const Home = () => {
+export const Home = () => {
   const styles = getStyles();
-  const {loading, products} = useProducts();
+  const {fetchProducts, loading, products, error} = useProducts();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   if (loading) {
     return <LoadingScreen />;
   }
   
+  if (Boolean(error) && !loading) {
+    return (
+      <ErrorScreen
+        errorMsg={error}
+        handleBtnClick={fetchProducts}
+        btnText="Refetch Products"
+        hasBtn
+      />
+    );
+  }
+
   const handleSelectProduct = (product: ProductType) => {
     navigation.navigate('Product', {product});
   };
@@ -34,9 +46,15 @@ const Home = () => {
         keyExtractor={(item: ProductType, index) => item.id?.toString()}
         style={{paddingHorizontal: 5}}
         numColumns={2}
+        testID="product-list"
+        ListEmptyComponent={
+          <View testID="empty-product-list">
+            <Text>
+              {/** This compoennt would show when there are no products returned from the api */}
+            </Text>
+          </View>
+        }
       />
     </SafeAreaView>
   );
 };
-
-export default Home;

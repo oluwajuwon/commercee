@@ -13,7 +13,6 @@ type ProductProps = {
 export const Product = ({product, onPress}: ProductProps) => {
   const {img, name, price, colour, id} = product;
   const styles = getStyles();
-
   const imgUrl = img.replace('http://', 'https://');
 
   const handlePress = () => {

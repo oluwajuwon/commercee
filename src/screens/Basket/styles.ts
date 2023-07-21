@@ -10,5 +10,10 @@ export default () => {
     safeArea: {
       flex: 1,
     },
+    emptyBasket: {
+      justifyContent: 'center',
+      flex: 1,
+      alignItems: 'center',
+    },
   });
 };
